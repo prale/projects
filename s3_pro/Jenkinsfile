@@ -2,10 +2,10 @@
 String credentialsId = 'awsCredentials'
 
 //parameters from job
-/*parameters{
-  String(vendor: 'vendor_name')
-}
-*/
+  parameters {
+    string(defaultValue: "jgfsajdgfjhsdgfj", description: 'Bucket name?', name: 'buckname')
+    }
+
 try {
   stage('checkout') {
     node {

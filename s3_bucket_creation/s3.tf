@@ -4,6 +4,6 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "tf_s3_course" {
-  bucket = "vaibhavmbuck77"
+  bucket = "terraform-bucket-vaibhav"
   acl = "private"
 }

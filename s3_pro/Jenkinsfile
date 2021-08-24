@@ -24,7 +24,7 @@ try {
         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
       ]]) {
         ansiColor('xterm') {
-          dir("ec2_creation"){
+          dir("s3_pro"){
           sh 'terraform init'
           }
         }
@@ -42,7 +42,7 @@ try {
         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
       ]]) {
         ansiColor('xterm') {
-          dir("ec2_creation"){
+          dir("s3_pro"){
           sh 'terraform plan'
           }
         }
@@ -62,7 +62,7 @@ try {
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
           ansiColor('xterm') {
-            dir("ec2_creation"){
+            dir("s3_pro"){
             sh 'terraform apply -auto-approve'
             }
           }
@@ -80,7 +80,7 @@ try {
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
           ansiColor('xterm') {
-            dir("ec2_creation"){
+            dir("s3_pro"){
             sh 'terraform show'
             }
           }

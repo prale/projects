@@ -86,7 +86,7 @@ try {
       }
     }
 
-    /*terraform destroy
+    //terraform destroy
     stage('destroy') {
       node {
         withCredentials([[
@@ -102,7 +102,7 @@ try {
           }
         }
       }
-    }*/
+    }
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {

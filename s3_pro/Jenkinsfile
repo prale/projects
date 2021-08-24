@@ -96,7 +96,7 @@ try {
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
           ansiColor('xterm') {
-            dir("ec2_creation"){
+            dir("s3_pro"){
             sh 'terraform destroy -auto-approve'
             }
           }

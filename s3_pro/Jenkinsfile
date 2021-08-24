@@ -1,6 +1,11 @@
 // Jenkinsfile
 String credentialsId = 'awsCredentials'
 
+//parameters from job
+/*parameters{
+  String(vendor: 'vendor_name')
+}
+*/
 try {
   stage('checkout') {
     node {
@@ -101,7 +106,7 @@ try {
       }
     }*/
   }
-  
+
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {

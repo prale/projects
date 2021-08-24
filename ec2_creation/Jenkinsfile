@@ -82,6 +82,26 @@ try {
         }
       }
     }
+
+    //terraform destroy
+    // Run terraform apply
+    stage('destroy') {
+      node {
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          credentialsId: credentialsId,
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        ]]) {
+          ansiColor('xterm') {
+            dir("ec2_creation"){
+            sh 'terraform destroy -auto-approve'
+            }
+          }
+        }
+      }
+    }
+
   }
   currentBuild.result = 'SUCCESS'
 }

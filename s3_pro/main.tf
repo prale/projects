@@ -5,6 +5,6 @@ provider "aws" {
 
 # Create s3 bucket
 resource "aws_s3_bucket" "tf_s3" {
-  bucket = "${params.buckname}"
+  bucket = "${buckname}"
   acl = "private"
 }

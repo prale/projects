@@ -50,8 +50,6 @@ try {
     }
   }
 
-  if (env.BRANCH_NAME == 'main') {
-
     // Run terraform apply
     stage('apply') {
       node {
@@ -105,8 +103,6 @@ try {
         }
       }
     }*/
-  }
-
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {

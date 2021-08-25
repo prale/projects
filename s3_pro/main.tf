@@ -4,13 +4,13 @@ provider "aws" {
 }
 
 # Create s3 bucket
-resource "aws_s3_bucket" "tf_aws_s3" {
+resource "aws_s3_bucket" "b" {
   bucket = var.bucket_name
   acl    = "private"
 }
 
-resource "aws_s3_bucket_policy" "tf_aws_s3" {
-  bucket = aws_s3_bucket.tf_aws_s3.id
+resource "aws_s3_bucket_policy" "b" {
+  bucket = aws_s3_bucket.b.id
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression's result to valid JSON syntax.

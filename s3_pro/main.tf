@@ -6,7 +6,7 @@ provider "aws" {
 # Create s3 bucket
 resource "aws_s3_bucket" "c" {
   bucket = var.bucket_name
-  //acl    = "private"
+  acl    = "private"
   tags = {
     Owner       = "Vaibhav"
     Environment = "Dev"

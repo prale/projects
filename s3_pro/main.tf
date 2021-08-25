@@ -7,6 +7,20 @@ provider "aws" {
 resource "aws_s3_bucket" "b" {
   bucket = var.bucket_name
   acl    = "private"
+  tags = {
+    Owner       = "Vaibhav"
+    Environment = "Dev"
+  }
+  versioning {
+    enabled = true
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "b" {
+  bucket = aws_s3_bucket.b.id
+
+  block_public_acls   = true
+  block_public_policy = true
 }
 
 resource "aws_s3_bucket_policy" "b" {

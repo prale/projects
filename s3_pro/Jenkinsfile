@@ -1,12 +1,4 @@
 // Jenkinsfile
-pipeline{
-  agent any
-
-//parameters
-  parameters {
-    string(name: 'buck_name', defaultValue: '', description: 'bucket name')
-  }
-
 String credentialsId = 'awsCredentials'
 
 try {
@@ -46,7 +38,7 @@ try {
       ]]) {
         ansiColor('xterm') {
           dir("s3_pro"){
-          sh 'terraform plan -var 'buck_name = ${params.buck_name}''
+          sh 'terraform plan'
           }
         }
       }
@@ -90,7 +82,7 @@ try {
     }
 
     //terraform destroy
-    stage('destroy') {
+    /*stage('destroy') {
       node {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
@@ -105,7 +97,7 @@ try {
           }
         }
       }
-    }
+    }*/
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {

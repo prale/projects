@@ -1,5 +1,5 @@
-/*variable "bucket_name" {
+variable "bucket_name" {
   type = string
-  default = ${params.buck_name}
+  default = "bucket-1211322212"
 }
-*/
+

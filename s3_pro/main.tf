@@ -4,27 +4,27 @@ provider "aws" {
 }
 
 # Create s3 bucket
-resource "aws_s3_bucket" "b" {
+resource "aws_s3_bucket" "c" {
   bucket = var.bucket_name
   acl    = "private"
-  /*tags = {
+  tags = {
     Owner       = "Vaibhav"
     Environment = "Dev"
   }
   versioning {
     enabled = true
-  }*/
+  }
 }
 
-resource "aws_s3_bucket_public_access_block" "b" {
-  bucket = aws_s3_bucket.b.id
+resource "aws_s3_bucket_public_access_block" "c" {
+  bucket = aws_s3_bucket.c.id
 
   block_public_acls   = true
   block_public_policy = true
 }
 
-resource "aws_s3_bucket_policy" "b" {
-  bucket = aws_s3_bucket.b.id
+resource "aws_s3_bucket_policy" "c" {
+  bucket = aws_s3_bucket.c.id
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression's result to valid JSON syntax.
@@ -38,8 +38,8 @@ resource "aws_s3_bucket_policy" "b" {
         Principal = "*"
         Action    = "s3:*"
         Resource = [
-          aws_s3_bucket.b.arn,
-          "${aws_s3_bucket.b.arn}/*",
+          aws_s3_bucket.c.arn,
+          "${aws_s3_bucket.c.arn}/*",
         ]
         Condition = {
           IpAddress = {

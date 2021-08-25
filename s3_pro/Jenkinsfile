@@ -82,7 +82,7 @@ try {
     }
 
     //terraform destroy
-    /*stage('destroy') {
+    stage('destroy') {
       node {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
@@ -97,7 +97,7 @@ try {
           }
         }
       }
-    }*/
+    }
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {

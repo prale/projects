@@ -6,7 +6,7 @@ provider "aws" {
 # Create s3 bucket
 resource "aws_s3_bucket" "c" {
   bucket = "wba-${var.bucket_name}-vendor"
-  //acl    = "private"
+  acl    = "private"
   tags = {
     Owner       = "Vaibhav"
     Environment = "Dev"
@@ -15,14 +15,14 @@ resource "aws_s3_bucket" "c" {
     enabled = true
   }
 }
-
+/*
 resource "aws_s3_bucket_public_access_block" "c" {
   bucket = aws_s3_bucket.c.id
 
   block_public_acls   = true
   block_public_policy = true
 }
-
+*/
 resource "aws_s3_bucket_policy" "c" {
   bucket = aws_s3_bucket.c.id
 

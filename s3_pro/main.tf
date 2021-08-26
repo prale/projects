@@ -53,5 +53,5 @@ resource "aws_s3_bucket_policy" "c" {
 
 resource "aws_s3_access_point" "c" {
   bucket = aws_s3_bucket.c.id
-  name   = "${aws_s3_bucket.c.id}"-access-point
+  name   = "${aws_s3_bucket.c.id}-access-point"
 }

@@ -5,7 +5,7 @@ provider "aws" {
 
 # Create s3 bucket
 resource "aws_s3_bucket" "c" {
-  bucket = var.bucket_name
+  bucket = "wba-${var.bucket_name}-vendor"
   //acl    = "private"
   tags = {
     Owner       = "Vaibhav"

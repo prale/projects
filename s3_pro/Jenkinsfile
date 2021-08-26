@@ -1,6 +1,10 @@
 // Jenkinsfile
 String credentialsId = 'awsCredentials'
 
+parameters {
+  string(name: 'vname', defaultValue: 'xxx', description: 'vendor name',)
+}
+
 try {
   stage('checkout') {
     node {

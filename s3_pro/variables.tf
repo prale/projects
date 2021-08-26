@@ -1,4 +1,4 @@
 variable "bucket_name" {
   description = "bucket_name"
-  default     = "vaibhav-f222buck12313"
+  default     = "vaibhav-55f222buck12313"
 }

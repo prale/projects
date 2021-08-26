@@ -34,18 +34,13 @@ resource "aws_s3_bucket_policy" "c" {
     Statement = [
       {
         Sid       = "IPAllow"
-        Effect    = "Deny"
+        Effect    = "Allow"
         Principal = "*"
         Action    = "s3:*"
         Resource = [
           aws_s3_bucket.c.arn,
           "${aws_s3_bucket.c.arn}/*",
         ]
-        Condition = {
-          IpAddress = {
-            "aws:SourceIp" = "8.8.8.8/32"
-          }
-        }
       },
     ]
   })

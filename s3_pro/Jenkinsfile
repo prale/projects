@@ -5,6 +5,10 @@ parameters{
   String(name: 'vname', defaultValue: '', description: 'vendor name')
 }
 
+environment{
+  bucket_name = "${params.vname}"
+}
+
 try {
   stage('checkout') {
     node {
@@ -60,7 +64,7 @@ try {
         ]]) {
           ansiColor('xterm') {
             dir("s3_pro"){
-            sh 'terraform apply -auto-approve -var 'bucket_name=$(vname)''
+            sh 'terraform apply -auto-approve'
             }
           }
         }

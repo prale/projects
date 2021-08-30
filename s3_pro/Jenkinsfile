@@ -1,13 +1,13 @@
 // Jenkinsfile
 String credentialsId = 'awsCredentials'
 
+pipeline{
+//parameters  
 parameters{
-  String(name: 'vname', defaultValue: '', description: 'vendor name')
+  String(name: 'vname', description: 'vendor name')
 }
 
-environment{
-  bucket_name = "${vname}"
-}
+agent any
 
 try {
   stage('checkout') {
@@ -28,7 +28,6 @@ try {
       ]]) {
         ansiColor('xterm') {
           dir("s3_pro"){
-            export bucket_name = "${vname}"
           sh 'terraform init'
           }
         }
@@ -120,4 +119,5 @@ finally {
   if (currentBuild.result == 'SUCCESS') {
     currentBuild.result = 'SUCCESS'
   }
+}
 }

@@ -10,6 +10,7 @@ parameters{
 agent any
 
 //try {
+  stages{
   stage('checkout') {
     node {
       cleanWs()
@@ -120,4 +121,5 @@ finally {
     currentBuild.result = 'SUCCESS'
   }
 }*/
+}
 }

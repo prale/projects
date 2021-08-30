@@ -12,14 +12,17 @@ agent any
 //try {
   stages{
   stage('checkout') {
+    steps{
     node {
       cleanWs()
       checkout scm
+    }
     }
   }
 
   // Run terraform init
   stage('init') {
+    steps{
     node {
       withCredentials([[
         $class: 'AmazonWebServicesCredentialsBinding',
@@ -34,10 +37,12 @@ agent any
         }
       }
     }
+    }
   }
 
   // Run terraform plan
   stage('plan') {
+    steps{
     node {
       withCredentials([[
         $class: 'AmazonWebServicesCredentialsBinding',
@@ -52,10 +57,12 @@ agent any
         }
       }
     }
+    }
   }
 
     // Run terraform apply
     stage('apply') {
+      steps{
       node {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
@@ -70,10 +77,12 @@ agent any
           }
         }
       }
+      }
     }
 
     // Run terraform show
     stage('show') {
+      steps{
       node {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
@@ -87,6 +96,7 @@ agent any
             }
           }
         }
+      }
       }
     }
 

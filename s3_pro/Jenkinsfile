@@ -9,7 +9,7 @@ parameters{
 
 agent any
 
-try {
+//try {
   stage('checkout') {
     node {
       cleanWs()
@@ -105,7 +105,7 @@ try {
           }
         }
       }
-    }*/
+    }
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
@@ -119,5 +119,5 @@ finally {
   if (currentBuild.result == 'SUCCESS') {
     currentBuild.result = 'SUCCESS'
   }
-}
+}*/
 }

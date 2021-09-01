@@ -8,11 +8,11 @@ pipeline {
 
    environment {
       AWS_ACCESS_KEY_ID = credentials('aws_access_key')
-      //AWS_REGION = credentials('aws_region')
-      //AWS_DEFAULT_REGION = credentials('aws_region')
+      AWS_REGION = credentials('aws_region')
+      AWS_DEFAULT_REGION = credentials('aws_region')
       AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')
-      //TF_IN_AUTOMATION = "true"
-      //AWS_ACCOUNT = credentials('aws_account')
+      TF_IN_AUTOMATION = "true"
+      AWS_ACCOUNT = credentials('aws_account')
    }
 
    stages {
@@ -27,45 +27,55 @@ pipeline {
       stage('Terraform INIT') {
          steps {
                echo 'Terraform INIT...'
+               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                dir('pro/'){
                   sh "terraform init"
-               }                
+               }   
+               }             
          }
       }
 
       stage('Terraform PLAN') {
          steps {
                echo 'Terraform PLAN...'
+               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                dir('pro/'){
                   sh "terraform plan"
-               }                
+               }    
+               }            
          }
       }
 
       stage('Terraform APPLY') {
          steps {
                echo 'Terraform APPLY...'
+               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                dir('pro/'){
                   sh "terraform apply -auto-approve"
-               }                
+               }   
+               }             
          }
       }
 
       stage('Terraform SHOW') {
          steps {
                echo 'Terraform SHOW...'
+               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                dir('pro/'){
                   sh "terraform show"
-               }                
+               }  
+               }              
          }
       }
 
       stage('Terraform DESTROY') {
          steps {
                echo 'Terraform DESTROY...'
+               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                dir('pro/'){
                   sh "terraform destroy -auto-approve"
-               }                
+               }       
+               }         
          }
       }
 

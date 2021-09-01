@@ -27,7 +27,7 @@ pipeline {
       stage('Terraform INIT') {
          steps {
                echo 'Terraform INIT...'
-               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+               withAWS(credentials: 'awsCredentials', region: 'us-east-1') {
                dir('pro/'){
                   sh "terraform init"
                }   
@@ -38,7 +38,7 @@ pipeline {
       stage('Terraform PLAN') {
          steps {
                echo 'Terraform PLAN...'
-               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+               withAWS(credentials: 'awsCredentials', region: 'us-east-1') {
                dir('pro/'){
                   sh "terraform plan"
                }    
@@ -49,7 +49,7 @@ pipeline {
       stage('Terraform APPLY') {
          steps {
                echo 'Terraform APPLY...'
-               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+               withAWS(credentials: 'awsCredentials', region: 'us-east-1') {
                dir('pro/'){
                   sh "terraform apply -auto-approve"
                }   
@@ -60,7 +60,7 @@ pipeline {
       stage('Terraform SHOW') {
          steps {
                echo 'Terraform SHOW...'
-               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+               withAWS(credentials: 'awsCredentials', region: 'us-east-1') {
                dir('pro/'){
                   sh "terraform show"
                }  
@@ -71,7 +71,7 @@ pipeline {
       stage('Terraform DESTROY') {
          steps {
                echo 'Terraform DESTROY...'
-               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+               withAWS(credentials: 'awsCredentials', region: 'us-east-1') {
                dir('pro/'){
                   sh "terraform destroy -auto-approve"
                }       

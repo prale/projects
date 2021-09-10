@@ -1,7 +1,7 @@
-/*terraform {
+terraform {
   backend "s3" {
-    bucket = "wbplay-vdm"
-    key    = "log/terrraform.tfstate"
+    bucket = "wba-mybucket"
+    key    = "logs/terrraform.tfstate"
     region = "us-east-1"
   }
-}*/
+}

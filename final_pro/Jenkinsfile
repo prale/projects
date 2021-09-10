@@ -58,7 +58,7 @@ try {
         ]]) {
           ansiColor('xterm') {
             dir("final_pro"){
-            sh 'terraform apply -out -auto-approve -var-file="terraform.tfvars"'
+            sh 'terraform apply -auto-approve -var-file="terraform.tfvars"'
             }
           }
         }

@@ -38,7 +38,7 @@ try {
       ]]) {
         ansiColor('xterm') {
           dir("final_pro"){
-          sh 'terraform plan -var-file = terraform.tfvars'
+          sh 'terraform plan -var-file="terraform.tfvars"'
           }
         }
       }
@@ -58,7 +58,7 @@ try {
         ]]) {
           ansiColor('xterm') {
             dir("final_pro"){
-            sh 'terraform apply -auto-approve -var-file = terraform.tfvars'
+            sh 'terraform apply -auto-approve -var-file="terraform.tfvars"'
             }
           }
         }

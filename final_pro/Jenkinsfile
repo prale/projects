@@ -1,119 +1,90 @@
-// Jenkinsfile
-String credentialsId = 'awsCredentials'
+pipeline {
+    agent any
 
-try {
-  stage('checkout') {
-    node {
-      cleanWs()
-      checkout scm
+    parameters {
+        string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment')
+        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
+        booleanParam(name: 'destroy', defaultValue: false, description: 'Destroy Terraform build?')
+
     }
-  }
 
-  // Run terraform init
-  stage('init') {
-    node {
-      withCredentials([[
-        $class: 'AmazonWebServicesCredentialsBinding',
-        credentialsId: credentialsId,
-        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-      ]]) {
-        ansiColor('xterm') {
-          dir("final_pro"){
-          sh 'terraform init'
-          }
-        }
-      }
+
+     environment {
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
-  }
 
-  // Run terraform plan
-  stage('plan') {
-    node {
-      withCredentials([[
-        $class: 'AmazonWebServicesCredentialsBinding',
-        credentialsId: credentialsId,
-        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-      ]]) {
-        ansiColor('xterm') {
-          dir("final_pro"){
-          sh 'terraform plan -out -var-file="terraform.tfvars"'
-          }
-        }
-      }
-    }
-  }
 
-  if (env.BRANCH_NAME == 'main') {
-
-    // Run terraform apply
-    stage('apply') {
-      node {
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding',
-          credentialsId: credentialsId,
-          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]]) {
-          ansiColor('xterm') {
-            dir("final_pro"){
-            sh 'terraform apply -auto-approve -var-file="terraform.tfvars"'
+    stages {
+        stage('checkout') {
+            steps {
+                 script{
+                        dir("final_pro")
+                        {
+                            git "https://github.com/prale/projects.git"
+                        }
+                    }
+                }
             }
-          }
+
+        stage('Plan') {
+            when {
+                not {
+                    equals expected: true, actual: params.destroy
+                }
+            }
+            
+            steps {
+                sh 'terraform init -input=false'
+                sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
+
+                sh "terraform plan -input=false -out tfplan "
+                sh 'terraform show -no-color tfplan > tfplan.txt'
+            }
         }
-      }
+        stage('Approval') {
+           when {
+               not {
+                   equals expected: true, actual: params.autoApprove
+               }
+               not {
+                    equals expected: true, actual: params.destroy
+                }
+           }
+           
+                
+            
+
+           steps {
+               script {
+                    def plan = readFile 'tfplan.txt'
+                    input message: "Do you want to apply the plan?",
+                    parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+               }
+           }
+       }
+
+        stage('Apply') {
+            when {
+                not {
+                    equals expected: true, actual: params.destroy
+                }
+            }
+            
+            steps {
+                sh "terraform apply -input=false tfplan"
+            }
+        }
+        
+        stage('Destroy') {
+            when {
+                equals expected: true, actual: params.destroy
+            }
+        
+        steps {
+           sh "terraform destroy --auto-approve"
+        }
     }
 
-    // Run terraform show
-    stage('show') {
-      node {
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding',
-          credentialsId: credentialsId,
-          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]]) {
-          ansiColor('xterm') {
-            dir("final_pro"){
-            sh 'terraform show'
-            }
-          }
-        }
-      }
-    }
-
-    //terraform destroy
-    // Run terraform apply
-    /*stage('destroy') {
-      node {
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding',
-          credentialsId: credentialsId,
-          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]]) {
-          ansiColor('xterm') {
-            dir("final_pro"){
-            sh 'terraform destroy -auto-approve'
-            }
-          }
-        }
-      }
-    }*/
-
-  }
-  currentBuild.result = 'SUCCESS'
-}
-catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
-  currentBuild.result = 'ABORTED'
-}
-catch (err) {
-  currentBuild.result = 'FAILURE'
-  throw err
-}
-finally {
-  if (currentBuild.result == 'SUCCESS') {
-    currentBuild.result = 'SUCCESS'
   }
 }

@@ -1,6 +1,6 @@
 //AWS Coount details
-access_key = "AKIA3YGI7V7GNBGOB65Y"
-secret_key = "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"
+//access_key = "AKIA3YGI7V7GNBGOB65Y"
+//secret_key = "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"
 aws_account = "807875358668"
 aws_region = "us-east-1"
 

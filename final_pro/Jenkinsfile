@@ -100,7 +100,7 @@ try {
           }
         }
       }
-    }*.
+    }*/
 
   }
   currentBuild.result = 'SUCCESS'

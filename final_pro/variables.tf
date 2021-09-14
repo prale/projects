@@ -2,10 +2,12 @@
 variable "access_key" {
     type        = string
     description = "(Required) AWS Access Key"
+    default = ""
 }
 variable "secret_key" {
     type        = string
     description = "(Required) AWS Secret Key"
+    default = ""
 }
 variable "aws_account" {
     type        = string

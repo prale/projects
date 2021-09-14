@@ -1,11 +1,11 @@
 //AWS Coount details
-access_key = AWS_ACCESS_KEY_ID
-secret_key = AWS_SECRET_ACCESS_KEY
+//access_key = AWS_ACCESS_KEY_ID
+//secret_key = AWS_SECRET_ACCESS_KEY
 aws_account = "807875358668"
 aws_region = "us-east-1"
 
 //Vendor details
-vendor_name = "vaibhavdm"
+vendor_name = "vaibhavdmore"
 vendor_user_role_arn = "arn:aws:iam::807875358668:user/prale"
 vendor_vpc_id = "vpc-99365ae4"
 read = false

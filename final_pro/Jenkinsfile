@@ -1,11 +1,5 @@
 pipeline {
     agent any
-    
-    parameters {
-        string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment')
-        string(name: 'version', defaultValue: '', description: 'Version variable to pass to Terraform')
-        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
-    }
 
     environment {
         AWS_DEFAULT_REGION="us-east-1"
@@ -24,18 +18,18 @@ pipeline {
 
         stage('checkout') {
             steps {
-                 checkout scm
+                 git branch: 'main', credentialsId: 'c8d323bf-fe34-4694-b2b2-2de9783744d4', url: 'https://github.com/prale/projects.git'
                 }
             }
         
         stage ("terraform init") {
             steps {
                 dir('final_pro'){
-                    sh 'terraform init -input=false'
+                    sh 'terraform init'
                 }
             }
         }
-        
+         /*
         stage ("terraform plan") {
             steps {
                 dir('final_pro'){
@@ -45,7 +39,7 @@ pipeline {
             }
         }
         }
-        /*
+       
         stage ("terraform apply") {
             steps {
                 sh "terraform apply -var-file="terraform.tfvars""

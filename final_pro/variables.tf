@@ -49,7 +49,7 @@ variable "write" {
 variable "read_write" {
   type        = bool
   description = "Allow read and write in the bucket"
-  default     = true
+  default     = false
 }
 
 //key configuration

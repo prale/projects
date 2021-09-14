@@ -28,6 +28,27 @@ pipeline {
                 }
             }
         }
+
+        stage ('Identify permission') {
+            when {
+                expression { params.permissions == 'read' }
+                }
+            steps {
+                permission = true
+                }
+             when {
+                expression { params.permissions == 'write' }
+                }
+            steps {
+                permission = true
+                }
+             when {
+                expression { params.permissions == 'read_write' }
+                }
+            steps {
+                permission = true
+                }
+        }
          
         stage ("terraform plan") {
             steps {
@@ -35,7 +56,7 @@ pipeline {
                     sh "terraform plan \
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
-                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' "
+                    -var 'vendor_vpc_id=${permission}' "
                 }
             }
         }

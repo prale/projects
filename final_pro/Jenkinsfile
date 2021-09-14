@@ -30,19 +30,23 @@ pipeline {
             }
         }
 
-        stage ("Identify permission") {
+        stage ("Read") {
             when {
                 expression { params.permissions == 'read' }
                 }
             steps {
                 permission = true
                 }
+        }
+        stage ("Write") {
              when {
                 expression { params.permissions == 'write' }
                 }
             steps {
                 permission = true
                 }
+        }
+        stage ("Read_Write") {
              when {
                 expression { params.permissions == 'read_write' }
                 }

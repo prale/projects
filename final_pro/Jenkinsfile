@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'vendor', defaultValue: 'vendor', description: 'vendor name')
+    }
+
     environment {
         AWS_DEFAULT_REGION="us-east-1"
         awsCredentials = credentials('awsCredentials')
@@ -33,14 +37,14 @@ pipeline {
         stage ("terraform plan") {
             steps {
                 dir('final_pro'){
-                    sh "terraform plan"
+                    sh "terraform plan -var 'vendor_name=${params.vendor}'"
+                }
             }
-        }
         }
        /*
         stage ("terraform apply") {
             steps {
-                sh "terraform apply -var-file="terraform.tfvars""
+                sh "terraform apply""
             }
         }
         

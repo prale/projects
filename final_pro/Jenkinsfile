@@ -44,7 +44,7 @@ pipeline {
                     sh 'terraform show -no-color tfplan > tfplan.txt'
             }
         }
-        
+        }
         /*
         stage ("terraform apply") {
             steps {

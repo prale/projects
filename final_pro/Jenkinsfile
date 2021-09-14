@@ -37,7 +37,7 @@ pipeline {
             }
         }
         }
-       
+       /*
         stage ("terraform apply") {
             steps {
                 sh "terraform apply -var-file="terraform.tfvars""

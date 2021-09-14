@@ -30,7 +30,7 @@ pipeline {
             }
         }
 
-        stage ('Identify permission') {
+        stage ("Identify permission") {
             when {
                 expression { params.permissions == 'read' }
                 }

@@ -2,7 +2,10 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'vendor', defaultValue: 'vendor', description: 'vendor name')
+        string(name: 'vendor_name', defaultValue: 'vendor', description: 'Vendor name')
+        string(name: 'vendor_user_role_arn', defaultValue: 'vendor_user_role_arn', description: 'ARN of User/Role in vendor account')
+        string(name: 'vendor_vpc_id', defaultValue: 'vendor_vpc_id', description: 'VPC ID in the Vendor account')
+        choice(name: 'permissions', choices: ['read', 'write', 'read_write'], description: 'Required permissions for the vendor')
     }
 
     environment {
@@ -11,14 +14,6 @@ pipeline {
     }
     
     stages {
-
-        stage ("test stage") {
-            steps {
-                sh '''
-                aws ec2 describe-instances
-                '''
-            }
-        }
 
         stage('checkout') {
             steps {
@@ -37,7 +32,10 @@ pipeline {
         stage ("terraform plan") {
             steps {
                 dir('final_pro'){
-                    sh "terraform plan -var 'vendor_name=${params.vendor}'"
+                    sh "terraform plan \
+                    -var 'vendor_name=${params.vendor_name}' \
+                    -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
+                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' "
                 }
             }
         }

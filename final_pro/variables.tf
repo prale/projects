@@ -24,17 +24,17 @@ variable "aws_region" {
 variable "vendor_name" {
     type        = string
     description = "(Required) Creates a unique bucket name beginning with the specified prefix."
-    default = "vaibhavdmore"
+    default = "null"
 }
 variable "vendor_user_role_arn" {
     type        = string
     description = "(Required) The user/role from vendor account that wll have the permissions"
-    default = "arn:aws:iam::807875358668:user/prale"
+    default = "null"
 }
 variable "vendor_vpc_id" {
     type        = string
     description = "(Required) VPC ID of the Vendor's VPC to use in access point Network origin"
-    default = "vpc-99365ae4"
+    default = "null"
 }
 variable "read" {
   type        = bool

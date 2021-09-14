@@ -30,29 +30,21 @@ pipeline {
             }
         }
 
-        stage ("Read") {
-            when {
-                expression { params.permissions == 'read' }
-                }
+        stage ("Permissions") {
             steps {
-                permission = true
+                script {
+                    if (permissions.equals("read"))
+                    {
+                            
+                    } if (params.permissions == "write")
+                    {
+
+                    } if (params.permissions == "read_write")
+                    {
+
+                    }
                 }
-        }
-        stage ("Write") {
-             when {
-                expression { params.permissions == 'write' }
-                }
-            steps {
-                permission = true
-                }
-        }
-        stage ("Read_Write") {
-             when {
-                expression { params.permissions == 'read_write' }
-                }
-            steps {
-                permission = true
-                }
+            }
         }
          
         stage ("terraform plan") {

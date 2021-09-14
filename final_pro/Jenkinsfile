@@ -11,7 +11,7 @@ pipeline {
         stage ("test stage") {
             steps {
                 sh '''
-                aws ec2 describe-instnces
+                aws ec2 describe-instances
                 '''
             }
         }

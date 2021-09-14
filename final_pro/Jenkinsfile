@@ -27,13 +27,14 @@ pipeline {
                 sh "terraform init"
             }
         }
-        /*
+        
         stage ("terraform plan") {
             steps {
-                sh "terraform plan -var-file="terraform.tfvars""
+                sh "terraform plan""
             }
         }
         
+        /*
         stage ("terraform apply") {
             steps {
                 sh "terraform apply -var-file="terraform.tfvars""

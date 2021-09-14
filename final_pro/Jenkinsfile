@@ -32,7 +32,9 @@ pipeline {
         
         stage ("terraform plan") {
             steps {
+                dir('final_pro'){
                 sh "terraform plan -out tfplan -var-file=terraform.tfvars"
+                }
             }
         }
         

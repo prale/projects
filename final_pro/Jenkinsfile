@@ -18,12 +18,7 @@ pipeline {
 
         stage('checkout') {
             steps {
-                 script{
-                        dir("final_pro")
-                        {
-                            git "https://github.com/prale/projects.git"
-                        }
-                    }
+                 checkout scm
                 }
             }
         /*

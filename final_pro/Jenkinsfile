@@ -36,10 +36,10 @@ pipeline {
                     if (params.permissions == "read")
                     {
                             
-                    } if (params.permissions == "write")
+                    } else if (params.permissions == "write")
                     {
 
-                    } if (params.permissions == "read_write")
+                    } else (params.permissions == "read_write")
                     {
 
                     }

@@ -59,7 +59,7 @@ variable "key_description" {
 variable "key_administrators" {
     type        = list
     description = "(Required) Description of the bucket"
-    default = "arn:aws:iam::807875358668:user/prale"
+    default = ["arn:aws:iam::807875358668:user/prale","arn:aws:iam::807875358668:user/vaibhav"]
 }
 
 //Bucket configuration

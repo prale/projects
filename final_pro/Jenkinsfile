@@ -33,7 +33,7 @@ pipeline {
         stage ("Permissions") {
             steps {
                 script {
-                    if (permissions.equals("read"))
+                    if (params.permissions == "read")
                     {
                             
                     } if (params.permissions == "write")

@@ -24,7 +24,9 @@ pipeline {
         
         stage ("terraform init") {
             steps {
-                sh 'terraform init -input=false'
+                dir('final_pro'){
+                    sh 'terraform init -input=false'
+                }
             }
         }
         

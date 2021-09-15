@@ -60,7 +60,6 @@ pipeline {
                     {
                         echo "Vendor require read permissions"
                         sh "terraform plan \
-                        -out \
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
@@ -69,7 +68,6 @@ pipeline {
                     {
                         echo "Vendor require write permissions"
                         sh "terraform plan \
-                        -out \
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
@@ -78,7 +76,6 @@ pipeline {
                     {
                         echo "Vendor require read_write permissions"
                         sh "terraform plan \
-                        -out \
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \

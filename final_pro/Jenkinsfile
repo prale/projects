@@ -11,6 +11,7 @@ pipeline {
     environment {
         AWS_DEFAULT_REGION="us-east-1"
         awsCredentials = credentials('awsCredentials')
+        perm = true
         //boolean read = false
         //boolean write = false
         //boolean read_write = false
@@ -62,7 +63,7 @@ pipeline {
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
-                    -var 'read=true' "      
+                    -var 'read=${perm}' "      
                     } else if (params.permissions == "write")
                     {
                         echo "Vendor require write permissions"
@@ -70,7 +71,7 @@ pipeline {
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
-                    -var 'write=true' " 
+                    -var 'write=${perm}' " 
                     } else (params.permissions == "read_write")
                     {
                         echo "Vendor require read_write permissions"
@@ -78,7 +79,7 @@ pipeline {
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
-                    -var 'read_write=true' "
+                    -var 'read_write=${perm}' "
                     }
                 }
 /*

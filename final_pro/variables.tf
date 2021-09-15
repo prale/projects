@@ -39,17 +39,17 @@ variable "vendor_vpc_id" {
 variable "read" {
   type        = bool
   description = "Allow reading of the bucket"
-  default     = false
+  default     = null
 }
 variable "write" {
   type        = bool
   description = "Allow writing in the bucket"
-  default     = true
+  default     = null
 }
 variable "read_write" {
   type        = bool
   description = "Allow read and write in the bucket"
-  default     = false
+  default     = null
 }
 
 //key configuration

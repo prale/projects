@@ -11,9 +11,9 @@ pipeline {
     environment {
         AWS_DEFAULT_REGION="us-east-1"
         awsCredentials = credentials('awsCredentials')
-        boolean read = false
-        boolean write = false
-        boolean read_write = false
+        //boolean read = false
+        //boolean write = false
+        //boolean read_write = false
     }
     
     stages {

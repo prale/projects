@@ -11,7 +11,9 @@ pipeline {
     environment {
         AWS_DEFAULT_REGION="us-east-1"
         awsCredentials = credentials('awsCredentials')
-        boolean permission = false
+        boolean read = false
+        boolean write = false
+        boolean read_write = false
     }
     
     stages {
@@ -35,13 +37,13 @@ pipeline {
                 script {
                     if (params.permissions == "read")
                     {
-                            
+                        export read = true       
                     } else if (params.permissions == "write")
                     {
-
+                        export write = true
                     } else (params.permissions == "read_write")
                     {
-
+                        export read_write = true
                     }
                 }
             }
@@ -54,7 +56,7 @@ pipeline {
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${permission}' "
-                }
+                }   
             }
         }
        /*

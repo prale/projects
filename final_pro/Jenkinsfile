@@ -11,7 +11,9 @@ pipeline {
     environment {
         AWS_DEFAULT_REGION="us-east-1"
         awsCredentials = credentials('awsCredentials')
-
+        boolean read = false
+        boolean write = false
+        boolean read_write = false
     }
     
     stages {
@@ -29,7 +31,26 @@ pipeline {
                 }
             }
         }
-
+/*
+        stage ("Permissions") {
+            steps {
+                script {
+                    if (params.permissions == "read")
+                    {
+                        //export read = true       
+                    } else if (params.permissions == "write")
+                    {
+                        echo "VAIBHAV WANT WRITE"
+                        var.write = true
+                        //export write = true
+                    } else (params.permissions == "read_write")
+                    {
+                        //export read_write = true
+                    }
+                }
+            }
+        }
+         */
         stage ("terraform plan") {
             steps {
                 dir('final_pro'){
@@ -52,7 +73,7 @@ pipeline {
                     -var 'write=true' " 
                     } else (params.permissions == "read_write")
                     {
-                        echo "Vendor require read and write permissions"
+                        echo "Vendor require read_write permissions"
                         sh "terraform plan \
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
@@ -68,10 +89,10 @@ pipeline {
                 }   
             }
         }
-/*
+       /*
         stage ("terraform apply") {
             steps {
-                sh "terraform apply"
+                sh "terraform apply""
             }
         }
         

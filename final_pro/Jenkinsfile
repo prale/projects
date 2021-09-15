@@ -31,7 +31,7 @@ pipeline {
                 }
             }
         }
-/*
+
         stage ("Permissions") {
             steps {
                 script {
@@ -48,7 +48,7 @@ pipeline {
                 }
             }
         }
-         */
+         
         stage ("terraform plan") {
             steps {
                 dir('final_pro'){

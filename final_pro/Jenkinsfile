@@ -90,47 +90,18 @@ pipeline {
                 }   
             }
         }
-       
+       /*
         stage ("terraform apply") {
             steps {
-                dir('final_pro'){
-                    script {
-                    if (params.permissions == "read")
-                    {
-                        echo "Vendor require read permissions"
-                        sh "terraform apply \
-                    -var 'vendor_name=${params.vendor_name}' \
-                    -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
-                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
-                    -var 'read=true' "      
-                    } else if (params.permissions == "write")
-                    {
-                        echo "Vendor require write permissions"
-                        sh "terraform apply \
-                    -var 'vendor_name=${params.vendor_name}' \
-                    -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
-                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
-                    -var 'write=true' " 
-                    } else (params.permissions == "read_write")
-                    {
-                        echo "Vendor require read_write permissions"
-                        sh "terraform apply \
-                    -var 'vendor_name=${params.vendor_name}' \
-                    -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
-                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
-                    -var 'read_write=true' "
-                    }
-                }
-                }
+                sh "terraform apply""
             }
         }
         
         stage ("terraform show") {
             steps {
-                dir('final_pro'){
-                    sh "terraform show"
-                }
+                sh "terraform show"
             }
-        }  
+        }
+        */
     }
 }

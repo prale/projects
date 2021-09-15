@@ -40,6 +40,7 @@ pipeline {
                         //export read = true       
                     } else if (params.permissions == "write")
                     {
+                        echo "VAIBHAV WANT WRITE"
                         //export write = true
                     } else (params.permissions == "read_write")
                     {

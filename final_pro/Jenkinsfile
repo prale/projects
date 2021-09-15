@@ -37,13 +37,13 @@ pipeline {
                 script {
                     if (params.permissions == "read")
                     {
-                        export read = true       
+                        //export read = true       
                     } else if (params.permissions == "write")
                     {
-                        export write = true
+                        //export write = true
                     } else (params.permissions == "read_write")
                     {
-                        export read_write = true
+                        //export read_write = true
                     }
                 }
             }

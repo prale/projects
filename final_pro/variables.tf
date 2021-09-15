@@ -44,7 +44,7 @@ variable "read" {
 variable "write" {
   type        = bool
   description = "Allow writing in the bucket"
-  default     = false
+  default     = true
 }
 variable "read_write" {
   type        = bool

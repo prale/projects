@@ -31,7 +31,7 @@ pipeline {
                 }
             }
         }
-
+/*
         stage ("Permissions") {
             steps {
                 script {
@@ -48,14 +48,14 @@ pipeline {
                 }
             }
         }
-         
+         */
         stage ("terraform plan") {
             steps {
                 dir('final_pro'){
                     sh "terraform plan \
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
-                    -var 'vendor_vpc_id=${permission}' "
+                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' "
                 }   
             }
         }

@@ -31,7 +31,7 @@ pipeline {
                 }
             }
         }
-
+/*
         stage ("Permissions") {
             steps {
                 script {
@@ -41,6 +41,7 @@ pipeline {
                     } else if (params.permissions == "write")
                     {
                         echo "VAIBHAV WANT WRITE"
+                        var.write = true
                         //export write = true
                     } else (params.permissions == "read_write")
                     {
@@ -49,14 +50,42 @@ pipeline {
                 }
             }
         }
-         
+         */
         stage ("terraform plan") {
             steps {
                 dir('final_pro'){
+                    script {
+                    if (params.permissions == "read")
+                    {
+                        echo "Vendor require read permissions"
+                        sh "terraform plan \
+                    -var 'vendor_name=${params.vendor_name}' \
+                    -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
+                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
+                    -var 'read=true' "      
+                    } else if (params.permissions == "write")
+                    {
+                        echo "VAIBHAV WANT WRITE"
+                        sh "terraform plan \
+                    -var 'vendor_name=${params.vendor_name}' \
+                    -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
+                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
+                    -var 'write=true' " 
+                    } else (params.permissions == "read_write")
+                    {
+                        echo "Vendor require read permissions"
+                        sh "terraform plan \
+                    -var 'vendor_name=${params.vendor_name}' \
+                    -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
+                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
+                    -var 'read_write=true' "
+                    }
+                }
+/*
                     sh "terraform plan \
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
-                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' "
+                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' " */
                 }   
             }
         }

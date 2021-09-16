@@ -98,11 +98,7 @@ pipeline {
                     if (params.permissions == "read")
                     {
                         echo "Vendor require read permissions"
-                        sh "terraform apply myplan -auto-approve \
-                    -var 'vendor_name=${params.vendor_name}' \
-                    -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
-                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
-                    -var 'read=true' "      
+                        sh "terraform apply myplan -auto-approve "      
                     } else if (params.permissions == "write")
                     {
                         echo "Vendor require write permissions"

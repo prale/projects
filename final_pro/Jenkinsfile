@@ -59,7 +59,7 @@ pipeline {
                     if (params.permissions == "read")
                     {
                         echo "Vendor require read permissions"
-                        sh "terraform plan -out=myplan \  
+                        sh "terraform plan -out=myplan 
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \

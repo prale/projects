@@ -96,7 +96,7 @@ pipeline {
         stage ("terraform apply") {
             steps {
                 dir('final_pro'){
-                    sh "terraform apply 'myplan'"
+                    sh "terraform apply myplan"
                        /*script {
                     if (params.permissions == "read")
                     {

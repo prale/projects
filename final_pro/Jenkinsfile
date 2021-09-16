@@ -82,6 +82,7 @@ pipeline {
                     -var 'read_write=true' "
                     }
                 }
+                sh "terraform validate"
 /*
                     sh "terraform plan \
                     -var 'vendor_name=${params.vendor_name}' \

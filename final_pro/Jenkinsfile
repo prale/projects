@@ -96,8 +96,7 @@ pipeline {
         stage ("terraform apply") {
             steps {
                 dir('final_pro'){
-                    sh "terraform apply myplan"
-                       /*script {
+                       script {
                     if (params.permissions == "read")
                     {
                         echo "Vendor require read permissions"
@@ -123,7 +122,7 @@ pipeline {
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
                     -var 'read_write=true' "
                     }
-                }*/
+                }
                 }
             }
         }

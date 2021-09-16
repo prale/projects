@@ -94,7 +94,7 @@ pipeline {
         stage ("terraform apply") {
             steps {
                 dir('final_pro'){
-                    sh "terraform apply myplan -auto-approve"
+                    sh "terraform apply -input=false myplan -no-color -auto-approve"
                        /*script {
                     if (params.permissions == "read")
                     {

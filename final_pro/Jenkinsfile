@@ -93,7 +93,9 @@ pipeline {
 
         stage ("terraform apply") {
             steps {
-                sh "terraform apply"
+                dir('final_pro'){
+                    sh "terraform apply"
+                }
             }
         }
         /*

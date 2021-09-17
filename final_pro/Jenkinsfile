@@ -72,7 +72,7 @@ pipeline {
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
                     -var 'write=true' " 
-                    } else (params.permissions == "read_write")
+                    } else if (params.permissions == "read_write")
                     {
                         echo "Vendor require read_write permissions"
                         sh "terraform plan -input=false -out tfplan \

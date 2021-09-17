@@ -12,9 +12,6 @@ pipeline {
         AWS_DEFAULT_REGION="us-east-1"
         awsCredentials = credentials('awsCredentials')
         perm = true
-        //boolean read = false
-        //boolean write = false
-        //boolean read_write = false
     }
     
     stages {
@@ -32,26 +29,7 @@ pipeline {
                 }
             }
         }
-/*
-        stage ("Permissions") {
-            steps {
-                script {
-                    if (params.permissions == "read")
-                    {
-                        //export read = true       
-                    } else if (params.permissions == "write")
-                    {
-                        echo "VAIBHAV WANT WRITE"
-                        var.write = true
-                        //export write = true
-                    } else (params.permissions == "read_write")
-                    {
-                        //export read_write = true
-                    }
-                }
-            }
-        }
-         */
+
         stage ("terraform plan") {
             steps {
                 dir('final_pro'){
@@ -84,11 +62,7 @@ pipeline {
                 }
                 echo "Validate config"
                 sh "terraform validate"
-/*
-                    sh "terraform plan \
-                    -var 'vendor_name=${params.vendor_name}' \
-                    -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
-                    -var 'vendor_vpc_id=${params.vendor_vpc_id}' " */
+
                 }   
             }
         }
@@ -100,12 +74,14 @@ pipeline {
                 }
             }
         }
-        /*
+    
         stage ("terraform show") {
             steps {
+                dir('final_pro'){
                 sh "terraform show"
+                }
             }
         }
-        */
+        
     }
 }

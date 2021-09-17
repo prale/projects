@@ -37,7 +37,7 @@ pipeline {
                     if (params.permissions == "read")
                     {
                         echo "Vendor require read permissions"
-                        sh "terraform plan -input=false -out tfplan \
+                        sh "terraform plan -input=false -out ${params.vendor_name}.tfplan \
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
@@ -45,7 +45,7 @@ pipeline {
                     } else if (params.permissions == "write")
                     {
                         echo "Vendor require write permissions"
-                        sh "terraform plan -input=false -out tfplan \
+                        sh "terraform plan -input=false -out ${params.vendor_name}.tfplan \
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
@@ -53,7 +53,7 @@ pipeline {
                     } else if (params.permissions == "read_write")
                     {
                         echo "Vendor require read_write permissions"
-                        sh "terraform plan -input=false -out tfplan \
+                        sh "terraform plan -input=false -out ${params.vendor_name}.tfplan \
                     -var 'vendor_name=${params.vendor_name}' \
                     -var 'vendor_user_role_arn=${params.vendor_user_role_arn}' \
                     -var 'vendor_vpc_id=${params.vendor_vpc_id}' \
@@ -70,7 +70,7 @@ pipeline {
         stage ("terraform apply") {
             steps {
                 dir('final_pro'){
-                 sh "terraform apply -input=false tfplan"
+                 sh "terraform apply -input=false ${params.vendor_name}.tfplan"
                 }
             }
         }
@@ -82,6 +82,6 @@ pipeline {
                 }
             }
         }
-        
+
     }
 }

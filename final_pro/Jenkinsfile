@@ -30,10 +30,10 @@ pipeline {
                     input=false \
                     -upgrade \
                     -backend=true \
-                    -backend-config="Region=us-east-1" \
-                    -backend-config="Bucket=wba-mybucket" \
-                    -backend-config="Key=logs/$(params.vendor_name).terraform.tfstate" \
-                    -backend-config="Acl=private" 
+                    -backend-config="region=us-east-1" \
+                    -backend-config="bucket=wba-mybucket" \
+                    -backend-config="key=logs/$(params.vendor_name).terraform.tfstate" \
+                    -backend-config="acl=private" 
                     "
                 }
             }

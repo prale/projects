@@ -25,16 +25,7 @@ pipeline {
         stage ("terraform init") {
             steps {
                 dir('final_pro'){
-                    sh "terraform init \
-                    -no-color \
-                    input=false \
-                    -upgrade \
-                    -backend=true \
-                    -backend-config="region=us-east-1" \
-                    -backend-config="bucket=wba-mybucket" \
-                    -backend-config="key=logs/$(params.vendor_name).terraform.tfstate" \
-                    -backend-config="acl=private" 
-                    "
+                    sh "terraform init -backend-config="region=us-east-1" -backend-config="bucket=wba-mybucket" -backend-config="key=logs/${params.vendor_name}.terraform.tfstate""
                 }
             }
         }

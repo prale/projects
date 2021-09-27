@@ -18,7 +18,7 @@ pipeline {
 
         stage('checkout') {
             steps {
-                 git branch: 'main', credentialsId: 'c8d323bf-fe34-4694-b2b2-2de9783744d4', url: 'https://github.com/prale/projects.git'
+                 git checkout 
                 }
             }
         

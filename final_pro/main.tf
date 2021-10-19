@@ -89,18 +89,18 @@ resource "aws_s3_bucket" "a" {
 
 // S3 bucket prefixes
 resource "aws_s3_bucket_object" "folder3" {
-    bucket = aws_s3_bucket.a.id
+    bucket = aws_s3_bucket.a[count.index]
     acl    = var.acl
     key    = "${var.vendor_name}-to-wba/"
     server_side_encryption = var.sse_algorithm
 }
 resource "aws_s3_bucket_object" "folder4" {
-    bucket = aws_s3_bucket.a.id
+    bucket = aws_s3_bucket.a[count.index]
     acl    = var.acl
     key    = "wba-to-${var.vendor_name}/"
     server_side_encryption = var.sse_algorithm
 }
-
+/*
 // S3 Block Public Access
 resource "aws_s3_bucket_public_access_block" "a" {
     count = var.analytic_bucket ? 1 : 0
@@ -109,3 +109,4 @@ resource "aws_s3_bucket_public_access_block" "a" {
     ignore_public_acls = var.ignore_public_acls
     restrict_public_buckets = var.restrict_public_buckets
 }
+*/

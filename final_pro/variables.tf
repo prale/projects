@@ -63,6 +63,12 @@ variable "key_administrators" {
     description = "(Required) Description of the bucket"
     default = ["arn:aws:iam::807875358668:user/prale","arn:aws:iam::807875358668:user/vaibhav"]
 }
+//Analytic bucket
+variable "analytic_bucket" {
+    type        = bool
+    description = "(Required) Is annalytic bucket required."
+    default = true
+}
 
 //Bucket configuration
 variable "acl" {

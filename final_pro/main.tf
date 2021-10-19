@@ -88,14 +88,14 @@ resource "aws_s3_bucket" "a" {
 }
 
 // S3 bucket prefixes
-resource "aws_s3_bucket_object" "folder1" {
+resource "aws_s3_bucket_object" "folder3" {
     count = var.analytic_bucket ? 1 : 0
     bucket = aws_s3_bucket.a.id
     acl    = var.acl
     key    = "${var.vendor_name}-to-wba/"
     server_side_encryption = var.sse_algorithm
 }
-resource "aws_s3_bucket_object" "folder2" {
+resource "aws_s3_bucket_object" "folder4" {
     count = var.analytic_bucket ? 1 : 0
     bucket = aws_s3_bucket.a.id
     acl    = var.acl

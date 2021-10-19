@@ -102,7 +102,7 @@ resource "aws_s3_bucket_object" "folder4" {
     key    = "wba-to-${var.vendor_name}/"
     server_side_encryption = var.sse_algorithm
 }
-*/
+
 // S3 Block Public Access
 resource "aws_s3_bucket_public_access_block" "a" {
     count = var.analytic_bucket ? 1 : 0
@@ -112,3 +112,4 @@ resource "aws_s3_bucket_public_access_block" "a" {
     ignore_public_acls = var.ignore_public_acls
     restrict_public_buckets = var.restrict_public_buckets
 }
+*/

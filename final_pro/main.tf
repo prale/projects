@@ -87,16 +87,14 @@ resource "aws_s3_bucket" "a" {
   }
 }
 
-/* S3 bucket prefixes
+// S3 bucket prefixes
 resource "aws_s3_bucket_object" "folder3" {
-    count = var.analytic_bucket ? 1 : 0
     bucket = aws_s3_bucket.a.id
     acl    = var.acl
     key    = "${var.vendor_name}-to-wba/"
     server_side_encryption = var.sse_algorithm
 }
 resource "aws_s3_bucket_object" "folder4" {
-    count = var.analytic_bucket ? 1 : 0
     bucket = aws_s3_bucket.a.id
     acl    = var.acl
     key    = "wba-to-${var.vendor_name}/"
@@ -106,10 +104,8 @@ resource "aws_s3_bucket_object" "folder4" {
 // S3 Block Public Access
 resource "aws_s3_bucket_public_access_block" "a" {
     count = var.analytic_bucket ? 1 : 0
-    bucket = aws_s3_bucket.a.id
     block_public_acls = var.block_public_acls
     block_public_policy = var.block_public_policy
     ignore_public_acls = var.ignore_public_acls
     restrict_public_buckets = var.restrict_public_buckets
 }
-*/
